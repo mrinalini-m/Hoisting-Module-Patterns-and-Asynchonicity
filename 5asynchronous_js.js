@@ -96,4 +96,73 @@ KnockKnockLog(0);
 //   }, 4000);
 // }
 
+/*
+6. What is the eventual output of this snippet? Approximately how long does it take to run?
+*/
+
+var a = 1;
+
+setTimeout( function(){
+  a = a * 2;
+
+  setTimeout( function(){
+     a = a * 3;
+  }, 500 );
+}, 100 );
+
+setTimeout( function(){
+  a = a + 1;
+
+  setTimeout( function(){
+     console.log( a );
+  }, 500 );
+}, 250 );
+
+/*
+--> The return value will be 9. It'll tabke about 750ms.
+
+8. Rewrite the previous snippet to not use nested inline function expressions. 
+Name each function like step1(),step2(), etc. Describe any observations you may 
+have about the readability of this version of the snippet compared to the previous version.
+
+*/
+var step1 = function() {
+  setTimeout( function(){
+  a = a * 2;
+  
+  }, 100 );
+}
+
+var step2 = function() {
+  setTimeout( function(){
+    a = a + 1;
+  }, 250 );
+}
+
+var step3 = function() {
+  setTimeout( function(){
+     a = a * 3;
+  }, 500 );
+}
+
+
+var step4 = function() {
+  setTimeout( function(){
+     console.log( a );
+  }, 500 );
+}
+
+/*
+-->Taking the functions out definitely makes it easier to read.
+
+9. Complete/rearrange this snippet so that it keeps going as long as each 
+request returns a new record to process:
+
+*/
+
+var record = "abc";
+
+ajax( "http://some.url/api", record, function(nextRecord){
+  // TODO: if set, process `nextRecord` in the same //way
+} );
 
